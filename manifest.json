@@ -14,8 +14,9 @@
 		"run_at": "document_end"
 	},
 	{
-		"matches": ["https://cards.chase.com/*"],
-		"js": ["injector_chase.js"],
+		"matches": ["https://*.chase.com/*"],
+        "css": [ "injector_chase.css" ],
+		"js": ["jquery.js", "injector_chase.js"],
 		"run_at": "document_end"
 	}
   ],

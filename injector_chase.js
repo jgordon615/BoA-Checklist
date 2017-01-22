@@ -4,46 +4,50 @@ function initialize() {
 }
 
 function createChecks() {
-	var records = document.getElementsByClassName("tranClass");
+	//var records = document.getElementsByClassName("tranClass");
+	var records = $("#transactionsBodyId tr");
 
 	for(var i=0; i<records.length; i++) {
 		var record = records[i];
 		
-		if (record.value) {
+		if (record.id && record.id.match(/^transaction-/)) {
 			var check = document.createElement('input');
 			check.className = "boa_checklist";
 			check.type = "checkbox";
 			check.record = record;
-			record.parentElement.appendChild(check);
+            check.onclick = toggle;
+
+            var container = $(record).find(".BODY .xs-overflow");
+
+			if (container) {
+				container.prepend(check);
+			} else {
+				console.log("Could not place checkmark for record", record);
+			}
 			
-			var val = localStorage.getItem(record.value);
+			var val = localStorage.getItem(record.id);
 			check.checked = val === "true";
-			
-			check.onclick = toggle; 
-			check.onload = function() { console.log("LOADING"); };
 		}
 	}
 }
 
 function recreateChecks() {
-	var checks = document.getElementsByClassName("boa_checklist");
-	
-	for(var i=checks.length-1; i>=0; i--) {
-		checks[i].parentNode.removeChild(checks[i]);
-	}
-	
+	$(".boa_checklist").remove();
 	createChecks();
 }
 
 function toggle(e) {
 	var record = e.srcElement.record;
+
+	var key = record.id;
+
 	if (record) {
 		if (!e.srcElement.checked) {
-			localStorage.removeItem(record.value);
+			localStorage.removeItem(key);
 		} else {
-			localStorage.setItem(record.value, "true");
+			localStorage.setItem(key, "true");
 		}
 	}
-};
+}
 
 initialize();
