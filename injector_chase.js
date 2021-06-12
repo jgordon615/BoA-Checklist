@@ -11,14 +11,9 @@ function createChecks() {
 
         var date = record.find("td:nth-child(1)").text().trim(),
             desc = record.find("td:nth-child(2)").text().trim(),
-            type = record.find("td:nth-child(3)").text().trim(),
             amount = record.find("td:nth-child(4)").text().trim();
 
-        if (type && !amount) {
-            amount = type;
-        }
-
-        if (date && desc && type && amount) {
+        if (date && desc && amount) {
             record.id = `${date}-${desc}-${amount}`;
 
             var check = document.createElement('input');

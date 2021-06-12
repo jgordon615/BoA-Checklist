@@ -3,7 +3,7 @@
 
   "name": "BoA Checklist",
   "description": "This extension adds a persistent checkbox next to BoA transactions.",
-  "version": "1.2",
+  "version": "1.3",
   "browser_action": {
     "default_icon": "icon.png"
   },
